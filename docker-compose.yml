@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:13-alpine
+    ports:
+      - 33001:5432
+    networks:
+      - default
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=user #在此填写postgres的用户名
+      - POSTGRES_PASSWORD=111111 #在此填写p
+    restart: always
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    volumes:
+      - ./pga4volume:/var/lib/pgadmin
+    environment: 
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com #在此填写pgAdmin登录账户邮箱
+      - PGADMIN_DEFAULT_PASSWORD=111111 #在此填写pgAdmin密码
+    ports:
+      - "33002:80"
+     
